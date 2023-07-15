@@ -1,0 +1,62 @@
+{
+    "postListHome": [
+        {
+        "id": 1,
+        "shopname": "shop1",
+        "region": "서울시",
+        "sort": "일식"
+        },
+        {
+        "id": 2,
+        "shopname": "shop2",
+        "region": "강원도",
+        "sort": "양식"
+        },
+        {
+        "id": 3,
+        "shopname": "shop3",
+        "region": "경상도",
+        "sort": "중식"
+        }
+        ],
+        
+    "post": [
+        {  
+            "id" : 1,
+            "shopname": "shop1",
+            "region": "서울시",
+            "sort" : "일식",
+            "address": "서초구 서초2동 1234",
+            "content": "맛있어요!!",
+            "imgurl": "fijeijfwe.cijfam.com",
+            "createdAt": "2022-12-01T12:52:25.183387",
+            "modifiedAt": "2022-12-01T12:52:25.183387",
+            "commentList": [
+            {
+            "id": 1,
+            "content": "댓글1",
+            "userid": "userid1",
+            "username" : "username1",
+            "modifiedAt": "2022-12-01T12:52:25.183387",
+            "username": "bin1234"
+            },
+            {
+            "id": 2,
+            "content": "댓글2",
+            "userid": "userid2",
+            "username" : "username2",
+            "modifiedAt": "2022-12-01T12:52:28.480369",
+            "username": "bin1234"
+            },
+            {
+            "id": 3,
+            "content": "댓글3",
+            "userid": "userid3",
+            "username" : "username3",
+            "modifiedAt": "2022-12-01T12:52:31.018677",
+            "username": "bin1234"
+            }
+            ]
+            }
+    ]
+  }
