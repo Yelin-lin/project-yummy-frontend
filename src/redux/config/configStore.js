@@ -3,7 +3,7 @@ import counter from "../modules/counter";
 
 const store = configureStore({
     reducer: {
-        counter: counter, 
+        // counter: counter, 
         // 예시
     }
 })
