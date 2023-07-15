@@ -1,5 +1,6 @@
 // 전체적용 스타일 컴포넌트
 
+
 import { styled } from "styled-components";
 
 // flex 및 가운데 정렬 div
