@@ -1,5 +1,6 @@
 // 전체적용 스타일 컴포넌트
 
+
 import { styled } from "styled-components";
 
 // flex 및 가운데 정렬 div
@@ -14,20 +15,25 @@ export const SInputLabelContainer = styled.div`
     display: flex;
     gap: ${({ $gapSize }) => $gapSize};
 
-    padding-bottom: 20px;
+    padding-bottom: ${({ $paddingBottom }) => $paddingBottom}px;
 `
 
 export const SLabelBox = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: ${({ $color }) => $color};
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
+
     ${({ $fontSort }) => {
         switch ($fontSort) {
             case 'big':
-                return 'font-size: 30px; font-weight: 700;';
+                return 'font-size: 30px; font-weight: 700; width: 80px; padding: 10px; border-radius: 10px;';
             default :
                 return null;
         }
     }}
-
-  color: rgb(0, 0, 0);
 `;
 
 export const SInputBox = styled.input`
