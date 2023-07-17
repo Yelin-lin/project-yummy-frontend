@@ -55,3 +55,25 @@ export const SInputBox = styled.input`
         border-bottom-color: rgba(var(--main-color), 1);;
     }
 `
+
+export const SButtonBox = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: ${({ $color }) => $color};
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
+
+    border: none;
+
+    cursor: pointer;
+
+    ${({ $buttonSort }) => {
+        switch ($buttonSort) {
+            case 'big':
+                return 'font-size: 30px; font-weight: 700; width: 300px; padding: 10px; border-radius: 10px; margin: 30px';
+            default :
+                return null;
+        }
+    }};
+`
