@@ -30,6 +30,8 @@ export const SLabelBox = styled.div`
         switch ($fontSort) {
             case 'big':
                 return 'font-size: 30px; font-weight: 700; width: 80px; padding: 10px; border-radius: 10px;';
+            case 'medium':
+                return 'font-size: 20px; font-weight: 700; width: 150px; padding: 5px; border-radius: 10px;';
             default :
                 return null;
         }
