@@ -4,19 +4,50 @@
         "id": 1,
         "shopname": "shop1",
         "region": "서울시",
-        "sort": "일식"
+        "sort": "일식",
+        "imgurl": "https://images.mypetlife.co.kr/content/uploads/2023/01/04154159/AdobeStock_101112878-1024x683.jpeg"
         },
         {
         "id": 2,
         "shopname": "shop2",
         "region": "강원도",
-        "sort": "양식"
+        "sort": "양식",
+        "imgurl": "https://images.mypetlife.co.kr/content/uploads/2023/01/04154159/AdobeStock_101112878-1024x683.jpeg"
         },
         {
         "id": 3,
         "shopname": "shop3",
         "region": "경상도",
-        "sort": "중식"
+        "sort": "중식",
+        "imgurl": "https://images.mypetlife.co.kr/content/uploads/2023/01/04154159/AdobeStock_101112878-1024x683.jpeg"
+        },
+        {
+        "id": 4,
+        "shopname": "shop4",
+        "region": "경상도",
+        "sort": "중식",
+        "imgurl": "https://images.mypetlife.co.kr/content/uploads/2023/01/04154159/AdobeStock_101112878-1024x683.jpeg"
+        },
+        {
+        "id": 5,
+        "shopname": "shop5",
+        "region": "경상도",
+        "sort": "중식",
+        "imgurl": "https://images.mypetlife.co.kr/content/uploads/2023/01/04154159/AdobeStock_101112878-1024x683.jpeg"
+        },
+        {
+        "id": 6,
+        "shopname": "shop6",
+        "region": "경상도",
+        "sort": "중식",
+        "imgurl": "https://images.mypetlife.co.kr/content/uploads/2023/01/04154159/AdobeStock_101112878-1024x683.jpeg"
+        },
+        {
+        "id": 7,
+        "shopname": "shop7",
+        "region": "경상도",
+        "sort": "중식",
+        "imgurl": "https://images.mypetlife.co.kr/content/uploads/2023/01/04154159/AdobeStock_101112878-1024x683.jpeg"
         }
         ],
         
