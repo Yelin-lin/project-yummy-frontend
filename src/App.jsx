@@ -8,24 +8,53 @@ import MyPage from './pages/mypage/MyPage';
 import Modify from './pages/modify/Modify';
 
 import { styled } from 'styled-components';
+import Join from './pages/join/Join';
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
     // const isLogin = false;
 
     return (
-        <PageContainer>
+        <QueryClientProvider client={queryClient}>
+    <PageContainer>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/login" element={<Login />} />
+                <Route
+            path='/'
+            element={
+              <>
+                <Header pageName='냠냠냠' />
+                <Home />
+              </>
+            }
+          />
+                    <Route 
+            path='/login' 
+            element={
+              <>
+                <Header pageName='로그인' />
+                <Login />
+              </>
+          } />
+          <Route 
+            path='/join' 
+            element={
+              <>
+                <Header pageName='회원가입' />
+                <Join />
+              </>
+          } />
                     <Route path="/DetailPage/:shopname" element={<DetailPage />} />
                     <Route path="/Post" element={<Post />} />
                     <Route path="/MyPage" element={<MyPage />} />
                     <Route path="/Modify" element={<Modify />} />
-                </Routes>
+        </Routes>
             </BrowserRouter>
         </PageContainer>
-    );
+      </QueryClientProvider>
+  );
 }
 
 export default App;
