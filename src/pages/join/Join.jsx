@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import { SButtonBox, SCenterLayout, SInputBox, SInputLabelContainer, SLabelBox } from '../../styles/globalstyles'
 import { styled } from 'styled-components'
 import useInput from '../../hooks/useInput';
+import axios from 'axios';
 
 function Join() {
 
   const CHECK_ICON = <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M9 22l-10-10.598 2.798-2.859 7.149 7.473 13.144-14.016 2.909 2.806z"/></svg>;
 
-  const [userName, onChangeUserNameHandler] = useInput();
+  const [username, onChangeUserNameHandler] = useInput();
   const [name, onChangeNameHandler] = useInput();
   const [email, onChangeEmailHandler] = useInput();
   const [password, onChangePasswordHandler] = useInput();
@@ -16,13 +17,26 @@ function Join() {
   const [passwordMatch, setPasswordMatch] = useState(true);
 
 
-  console.log(userName, name, email, password);
+  console.log(username, name, email, password);
 
-  const join = (passwordMatch)=>{
-    console.log(passwordMatch)
+  const handleJoin = async()=>{
+    const response = await axios.post(
+      'http://13.125.224.157/api/auth/sign-up',
+      {
+        username,
+        name,
+        email,
+        password,
+      },
+      {withCredentials: true}
+    );
+    console.log(response);
+  }
+
+  const join = ()=>{
     if(password === checkPassword){
       setPasswordMatch(true);
-      alert("가입성공")
+      alert("가입성공");
     } else{
       setPasswordMatch(false);
       alert("비밀번호가 다릅니다")
@@ -39,7 +53,7 @@ function Join() {
         $inputHeight="60" 
         $inputWidth="400" 
         $inputFontSize="25"
-        value={userName}
+        value={username}
         onChange={onChangeUserNameHandler}/>
         <SJoinButtonBox $buttonSort="medium" $color="rgb(255,105,180)" $backgroundColor="rgb(255,255,255)">아이디 중복 확인</SJoinButtonBox>
       </SInputLabelContainer>
@@ -102,7 +116,7 @@ function Join() {
       $buttonSort="big" 
       $color="rgb(255, 255, 255)" 
       $backgroundColor="rgb(255, 105, 180)"
-      onClick={join}>
+      onClick={handleJoin}>
         가입하기
       </SButtonBox>
     </SCenterLayout>

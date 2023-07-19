@@ -53,18 +53,11 @@ function Home() {
   };
 
   const handleSendToServer = async () => {
-    const params = new URLSearchParams();
-    params.set('region', regionSelect);
-    params.set('sort', sortSelect);
-    const queryString = params.toString();
-
-    // 서버에 queryString을 전송하는 로직을 추가해주세요
-    // 예: axios 라이브러리를 사용한 POST 요청
-
-    ///api/posts?region=%EC%84%9C%EC%9A%B8&sort=%EC%96%91%EC%8B%9D
+  
     try {
-      const response = await axios.get(`/api/posts?${queryString}`);
-      setYummyPlaceList(response.data);
+      const response = await axios.get(`/api/posts/params?sort=${encodeURIComponent(sortSelect)}&region=${encodeURIComponent(regionSelect)}`);
+      console.log(response);
+      // setYummyPlaceList(response.data);
       // 서버로부터 받은 데이터를 활용한 추가 작업 수행
     } catch (error) {
       console.error(error);
