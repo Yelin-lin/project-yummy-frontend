@@ -1,7 +1,6 @@
 // 전체적용 스타일 컴포넌트
 
-
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 // flex 및 가운데 정렬 div
 export const SCenterLayout = styled.div`
@@ -9,31 +8,26 @@ export const SCenterLayout = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-`
+`;
 // input 관련 styled-component
 export const SInputLabelContainer = styled.div`
     display: flex;
     gap: ${({ $gapSize }) => $gapSize};
 
-    padding-bottom: ${({ $paddingBottom }) => $paddingBottom}px;
-`
+    padding-bottom: 20px;
+`;
 
 export const SLabelBox = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: ${({ $color }) => $color};
-    background-color: ${({ $backgroundColor }) => $backgroundColor};
-
     ${({ $fontSort }) => {
         switch ($fontSort) {
             case 'big':
-                return 'font-size: 30px; font-weight: 700; width: 80px; padding: 10px; border-radius: 10px;';
-            default :
+                return 'font-size: 30px; font-weight: 700;';
+            default:
                 return null;
         }
     }}
+
+    color: rgb(0, 0, 0);
 `;
 
 export const SInputBox = styled.input`
@@ -50,8 +44,8 @@ export const SInputBox = styled.input`
 
     font-size: ${({ $inputFontSize }) => $inputFontSize}px;
 
-    &:focus{
+    &:focus {
         outline: none;
-        border-bottom-color: rgba(var(--main-color), 1);;
+        border-bottom-color: rgba(var(--main-color), 1);
     }
-`
+`;

@@ -1,11 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
-import counter from "../modules/counter";
+import { configureStore } from '@reduxjs/toolkit';
 
 const store = configureStore({
     reducer: {
-        // counter: counter, 
+        // counter: counter,
         // 예시
-    }
-})
+    },
+});
 
 export default store;
