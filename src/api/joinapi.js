@@ -13,4 +13,14 @@ const checkId = async (username) => {
   return response.data;
 };
 
-export {checkId};
+// 회원가입
+const signUp = async (userData) => {
+    const response = await axios.post(
+    'http://13.125.224.157/api/auth/sign-up',
+    userData,
+    { withCredentials: true }
+    );
+    return response.data; // 요청에 대한 응답 데이터 반환
+  };
+
+export {checkId, signUp};

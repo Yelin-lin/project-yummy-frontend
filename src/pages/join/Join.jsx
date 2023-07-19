@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { SButtonBox, SCenterLayout, SInputBox, SInputLabelContainer, SLabelBox } from '../../styles/globalstyles'
 import { styled } from 'styled-components'
 import useInput from '../../hooks/useInput';
-import axios from 'axios';
 import { useMutation } from 'react-query';
-import { checkId } from '../../api/joinapi';
+import { checkId, signUp } from '../../api/joinapi';
+import { useNavigate } from 'react-router-dom';
 
 function Join() {
 
@@ -14,38 +14,37 @@ function Join() {
   const [name, onChangeNameHandler] = useInput();
   const [email, onChangeEmailHandler] = useInput();
   const [password, onChangePasswordHandler] = useInput();
-
   const [checkPassword, onChangeCheckPassword] = useInput();
-
   const [checkIdAlert, setCheckIdAlert] = useState(false);
 
-  const handleJoin = async()=>{
-    if((password === checkPassword)&&(checkIdAlert)){
-      const response = await axios.post(
-        'http://13.125.224.157/api/auth/sign-up',
-        {
-          username,
-          name,
-          email,
-          password,
-        },
-        {withCredentials: true}
-      );
-      alert("가입성공!")
-      console.log(response);
-    }else{
-      alert("비밀번호가 다릅니다")
-    }
-
-  }
-
+  const signUpMutation = useMutation((userData) => signUp(userData));
   const checkIdMutation = useMutation((username) => checkId(username));
+
+  const navigate = useNavigate();
+
+  const userData = {
+        username,
+        name,
+        email,
+        password
+  }
+  
+  const handleSignUp = async () => {
+    try{
+      await signUpMutation.mutateAsync(userData);
+      alert("가입성공!");
+      navigate("/login"); 
+    } catch(error){
+      alert("가입실패!");
+      console.log(error)
+    }
+  }
   
   const handleCheckId = async () => {
     setCheckIdAlert(false);
     try {
       // checkIdMutation.mutate()를 사용하여 비동기 함수를 실행합니다
-      const response = await checkIdMutation.mutateAsync(username);
+      await checkIdMutation.mutateAsync(username);
       setCheckIdAlert(true);
       alert("사용가능한 아이디입니다");
     } catch (error) {
@@ -131,7 +130,7 @@ function Join() {
       $buttonSort="big" 
       $color="rgb(255, 255, 255)" 
       $backgroundColor="rgb(255, 105, 180)"
-      onClick={handleJoin}>
+      onClick={handleSignUp}>
         가입하기
       </SButtonBox>
     </SCenterLayout>
