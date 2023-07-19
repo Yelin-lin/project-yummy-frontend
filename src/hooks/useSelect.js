@@ -1,17 +1,18 @@
 import { useState } from 'react';
 
-const useSelect = optionData => {
-    const [selectedOption, setSelectedOption] = useState(null);
+function useSelect(options) {
+    const [selectedOption, setSelectedOption] = useState([0]);
 
-    const handleOptionClick = optionKey => {
-        const selected = optionData.find(option => option.optionKey === optionKey);
-        setSelectedOption(selected);
+    const handleSelect = event => {
+        const selectedValue = event.target.value;
+        //const selectedValue = options.find(option => option.optionKey === selectedValue);
+        setSelectedOption(selectedValue);
     };
 
     return {
         selectedOption,
-        handleOptionClick,
+        handleSelect,
     };
-};
+}
 
 export default useSelect;
