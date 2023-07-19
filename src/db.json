@@ -1,0 +1,52 @@
+{
+  "postListHome": [
+    {
+      "id": 1,
+      "shopname": "shop1",
+      "region": "서울시",
+      "sort": "일식"
+    },
+    {
+      "id": 2,
+      "shopname": "shop2",
+      "region": "강원도",
+      "sort": "양식"
+    },
+    {
+      "id": 3,
+      "shopname": "shop3",
+      "region": "경상도",
+      "sort": "중식"
+    }
+  ],
+  "posts": [
+    {
+      "shopname": "ㅇㄴㄹ",
+      "address": "ㅎㄱㄷㅎ",
+      "region": "경기도",
+      "sort": "카페",
+      "content": "ㅎㄷㄱ",
+      "imgurl": "ㅎㄷㄱㅎ",
+      "id": 2
+    },
+    {
+      "shopname": "vvvv",
+      "address": "vvv",
+      "region": "경기도",
+      "sort": "중식",
+      "content": "vdf",
+      "imgurl": "vdf",
+      "id": 7
+    }
+  ],
+  "comments": [
+    {
+      "postid": 1,
+      "content": "댓글1"
+    },
+    {
+      "postid": 2,
+      "content": "댓글2"
+    }
+  ]
+}
