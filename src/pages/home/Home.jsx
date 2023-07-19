@@ -13,7 +13,7 @@ function Home() {
   const [page, setPage] = useState(1); // 페이지 상태
 
   const fetchYummyPlaceList = async () => {
-    const { data } = await axios.get('http://localhost:4000/postListHome');
+    const { data } = await axios.get('http://13.125.224.157/api/posts');
     setYummyPlaceList(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
   };
 

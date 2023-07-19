@@ -9,18 +9,17 @@ function Login() {
   const [id, setId] = useState("");
   const [password, setPassword]= useState("");
   const [status, setStatus] = useState("아직 인증 안됨");
-  const Base_URL = "http://localhost:4000";
+  // const Base_URL = "http://13.125.224.157";
 
   const handleLogin = async () => {
     const response = await axios.post(
-      `${Base_URL}/login`,
+      'http://13.125.224.157/api/auth/login',
       {
         "username":id,
         "password":password,
       },
       {withCredentials: true}
     );
-
     const token = response.headers.get('Authorization');
     localStorage.setItem("key", token);
 
@@ -28,6 +27,7 @@ function Login() {
     setPassword('');
     console.log("response:", response);
     if(response.ok){
+      alert("로그인")
       setStatus("인증완료")
     } else{
       alert("로그인정보가 틀렸습니다")
