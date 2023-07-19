@@ -3,6 +3,8 @@ import { SButtonBox, SCenterLayout, SInputBox, SInputLabelContainer, SLabelBox }
 import { styled } from 'styled-components'
 import useInput from '../../hooks/useInput';
 import axios from 'axios';
+import { useMutation } from 'react-query';
+import { checkId } from '../../api/joinapi';
 
 function Join() {
 
@@ -14,13 +16,11 @@ function Join() {
   const [password, onChangePasswordHandler] = useInput();
 
   const [checkPassword, onChangeCheckPassword] = useInput();
-  const [passwordMatch, setPasswordMatch] = useState(true);
 
-
-  console.log(username, name, email, password);
+  const [checkIdAlert, setCheckIdAlert] = useState(false);
 
   const handleJoin = async()=>{
-    if(password === checkPassword){
+    if((password === checkPassword)&&(checkIdAlert)){
       const response = await axios.post(
         'http://13.125.224.157/api/auth/sign-up',
         {
@@ -39,6 +39,20 @@ function Join() {
 
   }
 
+  const checkIdMutation = useMutation((username) => checkId(username));
+  
+  const handleCheckId = async () => {
+    setCheckIdAlert(false);
+    try {
+      // checkIdMutation.mutate()를 사용하여 비동기 함수를 실행합니다
+      const response = await checkIdMutation.mutateAsync(username);
+      setCheckIdAlert(true);
+      alert("사용가능한 아이디입니다");
+    } catch (error) {
+      alert("아이디가 이미 있습니다");
+    }
+  };
+
   return (
     <SCenterLayout>
       <SJoinInputLayout>
@@ -51,7 +65,12 @@ function Join() {
         $inputFontSize="25"
         value={username}
         onChange={onChangeUserNameHandler}/>
-        <SJoinButtonBox $buttonSort="medium" $color="rgb(255,105,180)" $backgroundColor="rgb(255,255,255)">아이디 중복 확인</SJoinButtonBox>
+        <SJoinButtonBox 
+        $buttonSort="medium" 
+        $color="rgb(255,105,180)" 
+        $backgroundColor="rgb(255,255,255)"
+        onClick={handleCheckId}
+        >아이디 중복 확인</SJoinButtonBox>
       </SInputLabelContainer>
 
       <SInputLabelContainer $gapSize="10px">
