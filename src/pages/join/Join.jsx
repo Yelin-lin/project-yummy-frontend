@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
-import { SButtonBox, SCenterLayout, SInputBox, SInputLabelContainer, SLabelBox } from '../../styles/globalstyles'
+import { SCenterLayout} from '../../styles/globalstyles'
 import { styled } from 'styled-components'
 import useInput from '../../hooks/useInput';
 import { useMutation } from 'react-query';
 import { checkId, signUp } from '../../api/joinapi';
 import { useNavigate } from 'react-router-dom';
+import InputBox from './InputBox';
+import { Box } from '@chakra-ui/react';
+// import bcrypt from 'bcrypt'
 
 function Join() {
-
-  const CHECK_ICON = <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24"><path d="M9 22l-10-10.598 2.798-2.859 7.149 7.473 13.144-14.016 2.909 2.806z"/></svg>;
 
   const [username, onChangeUserNameHandler] = useInput();
   const [name, onChangeNameHandler] = useInput();
@@ -27,16 +28,26 @@ function Join() {
         name,
         email,
         password
+        // password: bcrypt.hash(password, 10)
   }
   
   const handleSignUp = async () => {
-    try{
-      await signUpMutation.mutateAsync(userData);
-      alert("가입성공!");
-      navigate("/login"); 
-    } catch(error){
-      alert("가입실패!");
-      console.log(error)
+    if (!username || !name || !email || !password || !checkPassword) {
+      alert("입력하지 않은 항목이 있습니다.");
+    } else if (password !== checkPassword) {
+      alert("비밀번호가 다릅니다.");
+    } else if (!checkIdAlert) {
+      alert("아이디 중복 확인을 진행하세요.");
+    } else {
+      try {
+        await signUpMutation.mutateAsync(userData);
+        alert("가입 성공!");
+        console.log(userData)
+        navigate("/login");
+      } catch (error) {
+        alert("가입 실패! 형식에 맞춰 가입해주세요");
+        console.log(error);
+      }
     }
   }
   
@@ -46,93 +57,68 @@ function Join() {
       // checkIdMutation.mutate()를 사용하여 비동기 함수를 실행합니다
       await checkIdMutation.mutateAsync(username);
       setCheckIdAlert(true);
-      alert("사용가능한 아이디입니다");
+      alert("사용 가능한 아이디입니다");
     } catch (error) {
       alert("아이디가 이미 있습니다");
     }
   };
+  console.log(userData);
 
   return (
     <SCenterLayout>
       <SJoinInputLayout>
-      <SInputLabelContainer $gapSize="10px" >
-        <SLabelBox $fontSort="medium" $backgroundColor="rgb(255,105,180)" $color="rgb(255,255,255)">아이디</SLabelBox>
-        <SInputBox 
-        $inputMainColor="255,20,147" 
-        $inputHeight="60" 
-        $inputWidth="400" 
-        $inputFontSize="25"
+      <InputBox
         value={username}
-        onChange={onChangeUserNameHandler}/>
-        <SJoinButtonBox 
-        $buttonSort="medium" 
-        $color="rgb(255,105,180)" 
-        $backgroundColor="rgb(255,255,255)"
+        onChange={onChangeUserNameHandler}
+        placeholder={'숫자, 영소문자로만 구성, 총 3~10자'}
+        check={true}
         onClick={handleCheckId}
-        >아이디 중복 확인</SJoinButtonBox>
-      </SInputLabelContainer>
+        >아이디</InputBox>
 
-      <SInputLabelContainer $gapSize="10px">
-        <SLabelBox $fontSort="medium" $backgroundColor="rgb(255,105,180)" $color="rgb(255,255,255)">이름</SLabelBox>
-        <SInputBox 
-        $inputMainColor="255,20,147" 
-        $inputHeight="60" 
-        $inputWidth="400" 
-        $inputFontSize="25"
+      <InputBox
         value={name}
-        onChange={onChangeNameHandler}/>
-      </SInputLabelContainer>
+        onChange={onChangeNameHandler}
+        placeholder={''}
+        >이름</InputBox>
 
-      <SInputLabelContainer $gapSize="10px">
-        <SLabelBox $fontSort="medium" $backgroundColor="rgb(255,105,180)" $color="rgb(255,255,255)">이메일</SLabelBox>
-        <SInputBox 
-        $inputMainColor="255,20,147" 
-        $inputHeight="60" 
-        $inputWidth="400" 
-        $inputFontSize="25"
+      <InputBox
         value={email}
-        onChange={onChangeEmailHandler}/>
-        <div>{CHECK_ICON} 이메일 형식을 맞춰주세요</div>
-      </SInputLabelContainer>
+        onChange={onChangeEmailHandler}
+        placeholder={'이메일 형식에 맞춰 적어주세요 (@)'}
+        type="email"
+        >이메일</InputBox>
 
-      <SInputLabelContainer $gapSize="10px">
-        <SLabelBox $fontSort="medium" $backgroundColor="rgb(255,105,180)" $color="rgb(255,255,255)">비밀번호</SLabelBox>
-        <SInputBox 
-        $inputMainColor="255,20,147" 
-        $inputHeight="60" 
-        $inputWidth="400" 
-        $inputFontSize="25"
+      <InputBox
         value={password}
         onChange={onChangePasswordHandler}
-        />
-        <div>
-          <div>{CHECK_ICON} 숫자를 포함해주세요</div>
-          <div>{CHECK_ICON} 기호를 포함해주세요</div>
-        </div>
-      </SInputLabelContainer>
+        placeholder={'영대•소문자, 숫자, 특수문자 1개이상 포함, 8자 ~ 15자'}
+        type="password"
+        >비밀번호</InputBox>
 
-      <SInputLabelContainer $gapSize="10px">
-          <SLabelBox $fontSort="medium" $backgroundColor="rgb(255, 105, 180)" $color="rgb(255, 255, 255)">
-            비밀번호 확인
-          </SLabelBox>
-          <SInputBox
-            $inputMainColor="255, 20, 147"
-            $inputHeight="60"
-            $inputWidth="400"
-            $inputFontSize="25"
-            value={checkPassword}
-            onChange={onChangeCheckPassword}
-            type="password"
-          />
-        </SInputLabelContainer>
+      <InputBox
+        value={checkPassword}
+        onChange={onChangeCheckPassword}
+        placeholder={'위에 작성한 비밀번호를 입력하세요'}
+        type="password"
+        >비밀번호 확인</InputBox>
+
       </SJoinInputLayout>
-      <SButtonBox 
-      $buttonSort="big" 
-      $color="rgb(255, 255, 255)" 
-      $backgroundColor="rgb(255, 105, 180)"
-      onClick={handleSignUp}>
+
+      <Box 
+      bg="#ED8936" 
+      w="300px" h="70px" 
+      color="white"
+      borderRadius="2xl"
+      fontSize="3xl"
+      fontWeight="semibold"
+      display={'flex'}
+      alignItems={'center'}
+      justifyContent={'center'}
+      onClick={handleSignUp}
+      mt="30px"
+       >
         가입하기
-      </SButtonBox>
+      </Box>
     </SCenterLayout>
   );
 }
@@ -142,11 +128,7 @@ export default Join
 const SJoinInputLayout = styled.div`
   display: flex;
   flex-Direction: column;
-  gap: 20px;
+  gap: 10px;
 
-  margin-top: 30px;
-`
-
-const SJoinButtonBox = styled(SButtonBox)`
-  border: 3px solid rgb(255,105,180);
+  margin-top: 20px;
 `
