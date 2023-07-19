@@ -53,28 +53,29 @@ function Home() {
   };
   //코드 간결화 고민
   const handleSendToServer = async () => {
-    let querySort = sortSelect;
-    let queryRegion = regionSelect;
-
-    if(querySort=="전체"&&queryRegion=="전체"){
+    if(((sortSelect==="전체")||(sortSelect==="")) && ((regionSelect==="전체")||(regionSelect===""))){
       const { data } = await axios.get('http://13.125.224.157/api/posts');
       setYummyPlaceList(data);
     } else{
-    
-      if(querySort == "전체"){
-        querySort='';
-      }else if(queryRegion=="전체"){
-        queryRegion='';
-      }
-    
-      try {
-        const {data} = await axios.get(`http://13.125.224.157/api/posts/params?sort=${encodeURIComponent(querySort)}&region=${encodeURIComponent(queryRegion)}`);
-        setYummyPlaceList(data);
-      } catch (error) {
-        console.error(error);
-      }
 
-    }
+        let queryString = '';
+
+        if(sortSelect === "전체"){
+          queryString=`region=${encodeURIComponent(regionSelect)}`;
+        }else if(regionSelect=== "전체"){
+          queryString=`sort=${encodeURIComponent(sortSelect)}`;
+        }else if(sortSelect !== "전체"&& regionSelect !== "전체"){
+          queryString = `sort=${encodeURIComponent(sortSelect)}&region=${encodeURIComponent(regionSelect)}`
+        }
+      
+        try {
+          const {data} = await axios.get(`http://13.125.224.157/api/posts/params?${queryString}`);
+          setYummyPlaceList(data);
+        } catch (error) {
+          console.error(error);
+        }
+
+      }
   };
 
   console.log(yummyPlaceList);
