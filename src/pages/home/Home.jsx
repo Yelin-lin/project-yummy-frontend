@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { styled } from 'styled-components';
 import { Button, Grid, GridItem, Image } from '@chakra-ui/react';
 import { SCenterLayout } from '../../styles/globalstyles';
-import SelectMenu from './SelectMenu';
+import SelectMenu from "./SelectMenu"
 import axios from 'axios';
 import Pagination from './Pagination';
 
