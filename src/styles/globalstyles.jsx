@@ -13,6 +13,7 @@ export const SCenterLayout = styled.div`
 // input 관련 styled-component
 export const SInputLabelContainer = styled.div`
     display: flex;
+    align-items: center;
     gap: ${({ $gapSize }) => $gapSize};
 
     padding-bottom: ${({ $paddingBottom }) => $paddingBottom}px;
@@ -30,6 +31,8 @@ export const SLabelBox = styled.div`
         switch ($fontSort) {
             case 'big':
                 return 'font-size: 30px; font-weight: 700; width: 80px; padding: 10px; border-radius: 10px;';
+            case 'medium':
+                return 'font-size: 20px; font-weight: 700; height: 50px; width: 150px; padding: 5px; border-radius: 10px;';
             default :
                 return null;
         }
@@ -54,4 +57,28 @@ export const SInputBox = styled.input`
         outline: none;
         border-bottom-color: rgba(var(--main-color), 1);;
     }
+`
+
+export const SButtonBox = styled.button`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: ${({ $color }) => $color};
+    background-color: ${({ $backgroundColor }) => $backgroundColor};
+
+    border: none;
+
+    cursor: pointer;
+
+    ${({ $buttonSort }) => {
+        switch ($buttonSort) {
+            case 'big':
+                return 'font-size: 30px; font-weight: 700; width: 300px; padding: 10px; border-radius: 10px; margin: 30px';
+            case 'medium' : 
+                return 'font-size: 15px; font-weight: 700; height:50px; width: 150px; padding: 2px; border-radius: 10px;';
+            default :
+                return null;
+        }
+    }};
 `

@@ -3,9 +3,14 @@ import { styled } from 'styled-components';
 import Header from './components/Header';
 import Home from './pages/home/Home';
 import Login from './pages/login/Login';
+import Join from './pages/join/Join';
+import { QueryClient, QueryClientProvider } from "react-query";
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
+    <QueryClientProvider client={queryClient}>
     <PageContainer>
       <BrowserRouter>
         <Routes>
@@ -26,9 +31,18 @@ function App() {
                 <Login />
               </>
           } />
+          <Route 
+            path='/join' 
+            element={
+              <>
+                <Header pageName='회원가입' />
+                <Join />
+              </>
+          } />
         </Routes>
       </BrowserRouter>
     </PageContainer>
+    </QueryClientProvider>
   );
 }
 
