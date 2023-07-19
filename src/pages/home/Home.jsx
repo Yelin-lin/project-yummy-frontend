@@ -12,6 +12,7 @@ function Home() {
   const [sortSelect, setSortSelect] = useState('');
   const [page, setPage] = useState(1); // 페이지 상태
 
+  
   const fetchYummyPlaceList = async () => {
     const { data } = await axios.get('http://13.125.224.157/api/posts');
     setYummyPlaceList(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
@@ -60,9 +61,9 @@ function Home() {
 
         let queryString = '';
 
-        if(sortSelect === "전체"){
+        if((sortSelect === "전체")||(sortSelect === "")){
           queryString=`region=${encodeURIComponent(regionSelect)}`;
-        }else if(regionSelect=== "전체"){
+        }else if((regionSelect=== "전체")||(regionSelect==="")){
           queryString=`sort=${encodeURIComponent(sortSelect)}`;
         }else if(sortSelect !== "전체"&& regionSelect !== "전체"){
           queryString = `sort=${encodeURIComponent(sortSelect)}&region=${encodeURIComponent(regionSelect)}`
