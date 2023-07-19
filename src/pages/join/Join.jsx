@@ -20,27 +20,23 @@ function Join() {
   console.log(username, name, email, password);
 
   const handleJoin = async()=>{
-    const response = await axios.post(
-      'http://13.125.224.157/api/auth/sign-up',
-      {
-        username,
-        name,
-        email,
-        password,
-      },
-      {withCredentials: true}
-    );
-    console.log(response);
-  }
-
-  const join = ()=>{
     if(password === checkPassword){
-      setPasswordMatch(true);
-      alert("가입성공");
-    } else{
-      setPasswordMatch(false);
+      const response = await axios.post(
+        'http://13.125.224.157/api/auth/sign-up',
+        {
+          username,
+          name,
+          email,
+          password,
+        },
+        {withCredentials: true}
+      );
+      alert("가입성공!")
+      console.log(response);
+    }else{
       alert("비밀번호가 다릅니다")
     }
+
   }
 
   return (

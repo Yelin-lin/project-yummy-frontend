@@ -51,16 +51,29 @@ function Home() {
   const handleSortSelect = (selectedSort) => {
     setSortSelect(selectedSort);
   };
-
+  //코드 간결화 고민
   const handleSendToServer = async () => {
-  
-    try {
-      const response = await axios.get(`/api/posts/params?sort=${encodeURIComponent(sortSelect)}&region=${encodeURIComponent(regionSelect)}`);
-      console.log(response);
-      // setYummyPlaceList(response.data);
-      // 서버로부터 받은 데이터를 활용한 추가 작업 수행
-    } catch (error) {
-      console.error(error);
+    let querySort = sortSelect;
+    let queryRegion = regionSelect;
+
+    if(querySort=="전체"&&queryRegion=="전체"){
+      const { data } = await axios.get('http://13.125.224.157/api/posts');
+      setYummyPlaceList(data);
+    } else{
+    
+      if(querySort == "전체"){
+        querySort='';
+      }else if(queryRegion=="전체"){
+        queryRegion='';
+      }
+    
+      try {
+        const {data} = await axios.get(`http://13.125.224.157/api/posts/params?sort=${encodeURIComponent(querySort)}&region=${encodeURIComponent(queryRegion)}`);
+        setYummyPlaceList(data);
+      } catch (error) {
+        console.error(error);
+      }
+
     }
   };
 
