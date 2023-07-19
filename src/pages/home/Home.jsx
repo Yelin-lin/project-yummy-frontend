@@ -5,6 +5,7 @@ import { SCenterLayout } from '../../styles/globalstyles';
 import SelectMenu from "./SelectMenu"
 import axios from 'axios';
 import Pagination from './Pagination';
+import { useNavigate } from 'react-router-dom';
 
 function Home() {
   const [yummyPlaceList, setYummyPlaceList] = useState([]);
@@ -12,9 +13,11 @@ function Home() {
   const [sortSelect, setSortSelect] = useState('');
   const [page, setPage] = useState(1); // 페이지 상태
 
+  const navigate = useNavigate();
+
   
   const fetchYummyPlaceList = async () => {
-    const { data } = await axios.get('http://13.125.224.157/api/posts');
+    const { data } = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/posts`);
     setYummyPlaceList(data); // 서버로부터 fetching한 데이터를 useState의 state로 set 합니다.
   };
 
@@ -81,6 +84,11 @@ function Home() {
 
   console.log(yummyPlaceList);
 
+  const handleBoxClick = (itemId) => {
+    // 아이템 ID를 링크의 뒤에 붙여서 특정 페이지로 이동
+    navigate(`/DetailPage/${itemId}`);
+  };
+
   const handlePageChange = (page) => {
     setPage(page);
   };
@@ -124,7 +132,12 @@ function Home() {
 
       <Grid templateColumns="repeat(3, 1fr)" gap={6}>
         {displayedItems.map((item) => (
-          <SYummyPlaceBox key={item.id} w="100%" h="40">
+          <SYummyPlaceBox 
+          key={item.id} 
+          w="100%" 
+          h="40"
+          onClick={() => handleBoxClick(item.id)}
+          >
             <SYummyPlaceImg src={item.imgurl} />
             <p>{item.shopname}</p>
             <div>
