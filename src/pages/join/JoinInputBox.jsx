@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Input } from '@chakra-ui/react';
 import { styled } from 'styled-components'
 
-function InputBox({ value, onChange, children, placeholder, check, onClick, type }) {
+function JoinInputBox({ value, onChange, children, placeholder, check, onClick, type }) {
   return (
     <SInputLabelContainer>
       <Box 
@@ -51,7 +51,7 @@ function InputBox({ value, onChange, children, placeholder, check, onClick, type
   );
 }
 
-export default InputBox;
+export default JoinInputBox;
 
 const SInputLabelContainer = styled.div`
   display: flex;

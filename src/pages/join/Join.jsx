@@ -5,7 +5,7 @@ import useInput from '../../hooks/useInput';
 import { useMutation } from 'react-query';
 import { checkId, signUp } from '../../api/joinapi';
 import { useNavigate } from 'react-router-dom';
-import InputBox from './InputBox';
+import JoinInputBox from './JoinInputBox';
 import { Box } from '@chakra-ui/react';
 // import bcrypt from 'bcrypt'
 
@@ -67,40 +67,40 @@ function Join() {
   return (
     <SCenterLayout>
       <SJoinInputLayout>
-      <InputBox
+      <JoinInputBox
         value={username}
         onChange={onChangeUserNameHandler}
         placeholder={'숫자, 영소문자로만 구성, 총 3~10자'}
         check={true}
         onClick={handleCheckId}
-        >아이디</InputBox>
+        >아이디</JoinInputBox>
 
-      <InputBox
+      <JoinInputBox
         value={name}
         onChange={onChangeNameHandler}
         placeholder={''}
-        >이름</InputBox>
+        >이름</JoinInputBox>
 
-      <InputBox
+      <JoinInputBox
         value={email}
         onChange={onChangeEmailHandler}
         placeholder={'이메일 형식에 맞춰 적어주세요 (@)'}
         type="email"
-        >이메일</InputBox>
+        >이메일</JoinInputBox>
 
-      <InputBox
+      <JoinInputBox
         value={password}
         onChange={onChangePasswordHandler}
         placeholder={'영대•소문자, 숫자, 특수문자 1개이상 포함, 8자 ~ 15자'}
         type="password"
-        >비밀번호</InputBox>
+        >비밀번호</JoinInputBox>
 
-      <InputBox
+      <JoinInputBox
         value={checkPassword}
         onChange={onChangeCheckPassword}
         placeholder={'위에 작성한 비밀번호를 입력하세요'}
         type="password"
-        >비밀번호 확인</InputBox>
+        >비밀번호 확인</JoinInputBox>
 
       </SJoinInputLayout>
 
