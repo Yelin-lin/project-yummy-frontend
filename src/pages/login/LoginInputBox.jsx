@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Input } from '@chakra-ui/react';
 import { styled } from 'styled-components'
 
-function LoginInputBox({value, onChange, children}) {
+function LoginInputBox({value, onChange, children, type}) {
   return (
     <SInputLabelContainer>
       <Box 
@@ -26,6 +26,7 @@ function LoginInputBox({value, onChange, children}) {
         value={value}
         onChange={onChange}
         focusBorderColor="#ED8936" 
+        type={type}
       />
       </SInputLabelContainer>
   )

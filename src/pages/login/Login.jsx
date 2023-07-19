@@ -28,7 +28,7 @@ function Login() {
   return (
     <SLogInLayout>
       <LoginInputBox value={id} onChange={onChangeIdHandler}>ID</LoginInputBox>
-      <LoginInputBox value={password} onChange={onChangePasswordHandler}>PW</LoginInputBox>
+      <LoginInputBox value={password} onChange={onChangePasswordHandler} type="password">PW</LoginInputBox>
 
       <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
       <div>→ 회원이 아니신가요?  
