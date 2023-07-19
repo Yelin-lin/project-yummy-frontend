@@ -4,6 +4,8 @@ import { SLabelBox, SCenterLayout, SInputLabelContainer, SInputBox, SButtonBox }
 import { useNavigate } from 'react-router-dom';
 import { handleLogin } from '../../api/loginapi';
 import useInput from '../../hooks/useInput';
+import LoginInputBox from './LoginInputBox';
+import LoginButton from './LoginButton';
 
 function Login() {
   const navigate = useNavigate();
@@ -25,33 +27,16 @@ function Login() {
 
   return (
     <SLogInLayout>
-      <SInputLabelContainer $gapSize="10px" $paddingBottom="20">
-        <SLabelBox $fontSort="big" $color="rgb(255,255,255)" $backgroundColor="rgb(255,182,193)">ID</SLabelBox>
-        <SInputBox 
-        $inputMainColor="255,20,147" 
-        $inputHeight="60" 
-        $inputWidth="350" 
-        $inputFontSize="25"
-        value={id}
-        onChange={onChangeIdHandler}/>
-      </SInputLabelContainer>
+      <LoginInputBox value={id} onChange={onChangeIdHandler}>ID</LoginInputBox>
+      <LoginInputBox value={password} onChange={onChangePasswordHandler}>PW</LoginInputBox>
 
-      <SInputLabelContainer $gapSize="10px" $paddingBottom="20">
-        <SLabelBox $fontSort="big" $color="rgb(255,255,255)" $backgroundColor="rgb(255,182,193)">PW</SLabelBox>
-        <SInputBox 
-        $inputMainColor="255,20,147" 
-        $inputHeight="60" $inputWidth="350" 
-        $inputFontSize="25"
-        value = {password}
-        onChange = {onChangePasswordHandler}/>
-      </SInputLabelContainer>
-
-      <SButtonBox $buttonSort="big" $color="rgb(255, 255, 255)" $backgroundColor="rgb(255,182,193)" onClick={handleLoginClick}>로그인</SButtonBox>
+      <LoginButton onClick={handleLoginClick}>로그인</LoginButton>
       <div>→ 회원이 아니신가요?  
         <SLogInSpanBox onClick={()=>{
           navigate("/join")
         }}> 회원가입</SLogInSpanBox>
       </div>
+
 
     </SLogInLayout>
   )
@@ -64,7 +49,7 @@ const SLogInLayout = styled(SCenterLayout)`
 `
 
 const SLogInSpanBox = styled.span`
-  color: rgb(255,20,147);
+  color: #ED8936;
   font-weight: 600;
 
   cursor: pointer;
