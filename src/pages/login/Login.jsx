@@ -16,7 +16,7 @@ function Login() {
         try {
             const data = await handleLogin(id, password);
             const token = data.headers.get('Authorization');
-            localStorage.setItem('Authorization', token);
+            localStorage.setItem('token', token);
             navigate('/');
             console.log(data);
         } catch (error) {
