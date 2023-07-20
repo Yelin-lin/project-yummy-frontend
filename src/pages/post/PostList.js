@@ -48,13 +48,24 @@ const Button = styled.div`
     }
 `;
 
+const SYummyPlaceImg = styled(Image)`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+    border-radius: 10px;
+`;
+
 // const onRemove = useCallback(write => {
 //     setLocalWrites(savedData => savedData.filter(w => w !== write));
 // }, []);
 const PostItem = () => {
     const [posts, setPosts] = useState([]);
     const getPosts = () => {
-        axios.get('http://localhost:4000/posts').then(res => {
+        axios.get('http://13.125.224.157/api/posts/{postId}').then(res => {
             setPosts(res.data);
         });
     };
@@ -64,7 +75,7 @@ const PostItem = () => {
 
     const handleRemove = async postId => {
         try {
-            await axios.delete(`http://localhost:4000/posts/${postId}`);
+            await axios.delete(`http://13.125.224.157/api/mypage/${postId}`);
             getPosts(); // 삭제 후 게시물 목록을 다시 가져옴
         } catch (error) {
             console.error(error);
@@ -77,6 +88,7 @@ const PostItem = () => {
                 return (
                     <PostTemBlock key={post.id}>
                         <postBox>
+                            {/* <SYummyPlaceImg src={post.imgurl} />*/}
                             {/* post.id로 수정 */}
                             <p>가게이름 : {post.shopname}</p> {/* post.shopname로 수정 */}
                             <p>지역 : {post.region}</p> {/* post.region으로 수정 */}

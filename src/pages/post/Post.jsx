@@ -2,14 +2,11 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import useInput from '../../hooks/useInput';
-import useSelect from '../../hooks/useSelect';
 import Styled from 'styled-components';
 import Button from '../../components/common/Button';
 import axios from 'axios';
-import PostItem from './PostList';
+// import PostItem from './PostList';
 
-const token =
-    'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJodGlnZXIiLCJleHAiOjE2ODk3ODMwNzQsImlhdCI6MTY4OTc3OTQ3NH0.ed8S1LIiRmwLnn9JtjMV29C9Pwk7Q6MID4_iknLkxuA';
 const QuillWrapper = Styled.div`
     .ql-editor {
         padding: 0;
@@ -84,18 +81,21 @@ const Post = () => {
         content: content,
         imgurl: imgurl,
     };
-
+    const token =
+        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJodGlnZXIiLCJleHAiOjE2ODk3ODMwNzQsImlhdCI6MTY4OTc3OTQ3NH0.ed8S1LIiRmwLnn9JtjMV29C9Pwk7Q6MID4_iknLkxuA';
+    // const token = localStorage.getItem('token');
+    console.log(token);
     const onSubmit = async e => {
         e.preventDefault();
         try {
             await axios.post(
-                'http://localhost:4000/posts',
+                'http://13.125.224.157/api/posts',
                 savedData,
-                // headers: { Accept: '*/*', Authorization: `${token}` },
-                //withCredentials: true,
+                { headers: { Authorization: `${token}` } },
+                { withCredentials: true },
             ); // 데이터를 서버에 보냄
             console.log(savedData);
-            navigate('/DetailPage/:shopname'); // 저장된 데이터를 콘솔에 출력 (선택사항)
+            navigate(`/DetailPage/${shopname}`); // 저장된 데이터를 콘솔에 출력 (선택사항)
             // 성공적으로 서버에 데이터를 보냈을 경우, 원하는 동작을 수행하면 됨
             // 예를 들면, 다른 페이지로 이동하거나 폼을 초기화하는 등의 동작 가능
         } catch (error) {

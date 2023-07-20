@@ -91,21 +91,20 @@ const Write = styled.div`
 
 const WriteBox = () => {
     const [comment, onChangecommentHandler, resetComment] = useInput();
-
     const [comments, setComments] = useState([]);
-    const newComment = { comments };
+
     const onSubmit = async e => {
         e.preventDefault();
         try {
-            await axios.post('http://localhost:4000/comments', comments);
+            const newComment = { content: comment };
+            const response = await axios.post('http://13.125.224.157/api/comments', newComment);
 
-            setComments(prevComments => [...prevComments, comments]);
-            resetComment();
+            setComments(response.data);
+            console.log(response);
         } catch (error) {
             console.error(error);
             // 데이터를 보내는 데 실패한 경우, 에러 처리
         }
-        console.log(comments);
     };
 
     // useEffect(() => {
@@ -120,7 +119,7 @@ const WriteBox = () => {
                 <button type="submit">추가</button>
             </WriteForm>
 
-            <WriteItem />
+            <WriteItem comments={comments} />
         </WriteBoxBlock>
     );
 };

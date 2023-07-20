@@ -34,7 +34,7 @@ const SubInfo = styled.div`
     color: ${Palette.gray[6]};
 
     span + span:before {
-        color: ${Palette.gray[4]};
+        color: ${Palette.gray[8]};
         padding-left: 0.25rem;
         padding-right: 0.25rem;
         content: '\\B7';
@@ -55,7 +55,7 @@ const Button = styled.div`
 const WriteItem = () => {
     const [posts, setPosts] = useState([]);
     const getPosts = () => {
-        axios.get('http://localhost:4000/comments').then(res => {
+        axios.get('http://13.125.224.157/api/mypage').then(res => {
             setPosts(res.data);
         });
     };
@@ -63,9 +63,9 @@ const WriteItem = () => {
         getPosts();
     }, []);
 
-    const handleRemove = async postid => {
+    const handleRemove = async postId => {
         try {
-            await axios.delete(`http://localhost:4000/comments`);
+            await axios.delete(`http://localhost:4001/${postId}`);
             getPosts(); // 삭제 후 게시물 목록을 다시 가져옴
         } catch (error) {
             console.error(error);
@@ -75,11 +75,9 @@ const WriteItem = () => {
         <div>
             {posts.map(post => {
                 return (
-                    <Write>
+                    <Write key={post.id}>
                         <SubInfo>
-                            <p> {post.commentList[0].modifiedAt}</p> {/* post.shopname로 수정 */}
-                            <p> {post.commentList[0].username}</p> {/* post.region으로 수정 */}
-                            <p> {post.commentList[0].content}</p> {/* post.sort로 수정 */}
+                            <p> {post.content}</p>
                             <ButtonSet>
                                 <Button onClick={() => handleRemove(post.postid)}>삭제</Button>
                                 {/* <Button onClick={() => handleModify(post.id)}>수정하기</Button> */}
