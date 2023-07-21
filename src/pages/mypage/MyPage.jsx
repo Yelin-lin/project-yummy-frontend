@@ -9,38 +9,19 @@ padding-top : 3rem;
 padding-bottom:3rem;
 justify-content : space-around;
 display: flex;
-&:first-chid{padding-top:0;
+&:first-chid{padding-top:0};
 
 &+& {
     border-top : 1px solid ${Palette.gray[2]};
 }
 h2 {
     font-size : 2rem;
-    margin-bottem : 0;
+    margin-bottom : 0;
     margin-top : 0;
+}
 p{
     margin-top : 2rem
-}`;
-const Container = styled.div`
-    border-bottom: 1px solid ${Palette.gray[4]};
-`;
-const Page = styled.h2`
-    font-size: 2rem;
-    margin-bottom: 0;
-    margin-top: 0;
-`;
-const Listwrapper = styled.div`
-    flex-wrap: wrap;
-    gap: 12px;
-`;
-const WriteListBlock = styled.div`
-    margin : 20px;
-    margin-top : 0.5rem
-    padding : 30px;
-
-    border-radius : 5px;
-
-`;
+};
 
 // const SubInfo = styled.div`
 // color: ${Palette.gray[4]};
@@ -79,3 +60,26 @@ const MyPage = () => {
 };
 
 export default MyPage;
+
+const Container = styled.div`
+    border-bottom: 1px solid ${Palette.gray[4]};
+`;
+const Page = styled.h2`
+    font-size: 2rem;
+    margin-bottom: 0;
+    margin-top: 0;
+`;
+
+const Listwrapper = styled.div`
+    flex-wrap: wrap;
+    gap: 12px;
+`;
+
+const WriteListBlock = styled.div`
+    margin : 20px;
+    margin-top : 0.5rem;
+    padding : 30px;
+
+    border-radius : 5px;
+
+`;
